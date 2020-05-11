@@ -20,8 +20,8 @@ spec:
           ports:
             - containerPort: 9000
   triggers:
-    - type: "ConfigChange" 
-    - type: "ImageChange" 
+    - type: "ConfigChange"
+    - type: "ImageChange"
       imageChangeParams:
         automatic: true
         containerNames:
@@ -29,3 +29,4 @@ spec:
         from:
           kind: "ImageStreamTag"
           name: "py:latest"
+EOF
