@@ -1,0 +1,31 @@
+apiVersion: "apps.openshift.io/v1"
+kind: DeploymentConfig
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+  namespace: openshift
+spec:
+  replicas: 1
+  selector:
+    app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
+      volumes:
+        - name: nginx
+          configMap:
+            name: nginx
+  triggers:
+    - type: "ConfigChange"
